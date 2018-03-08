@@ -1,8 +1,6 @@
-package iot.challenge.mira.backend.examples.publicly;
+package iot.challenge.mira.backend.examples;
 
 import com.eclipsesource.json.JsonObject;
-
-import iot.challenge.mira.backend.examples.Helper;
 
 public class Publicly {
 
