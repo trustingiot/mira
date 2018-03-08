@@ -7,4 +7,4 @@
 ## Projects
 
 * **iot.challenge.mira.backend.examples**: Examples to use the backend.
-* **iot.challenge.mira.app**: Mira app.
+* **com.wordpress.trusted827.mira**: Mira app.
