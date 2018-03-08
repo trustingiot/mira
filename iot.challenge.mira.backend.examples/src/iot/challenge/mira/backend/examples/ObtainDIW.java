@@ -21,7 +21,7 @@ public class ObtainDIW {
 	}
 
 	private static void help() {
-		System.out.println("Invalid arguments\nArgs: IP DEVICE PASSWROD");
+		System.out.println("Invalid arguments\nArgs: IP DEVICE PASSWORD");
 	}
 
 	private static void execute(String ip, String device, String password) {
