@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             android:layout_width="fill_parent"
+                                             android:layout_height="fill_parent">
+
+    <android.support.design.widget.TextInputLayout android:id="@+id/textInputLayout2"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width="300.0dip"
+                                                   android:layout_height="wrap_content"
+                                                   android:layout_marginTop="24.0dip"
+                                                   app:layout_constraintLeft_toLeftOf="parent"
+                                                   app:layout_constraintRight_toRightOf="parent"
+                                                   app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Introduce your relative name"
+            android:lines="1"
+            android:maxLength="40"
+            android:textSize="14.0sp"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout android:id="@+id/textInputLayout3"
+                                                   xmlns:n3="http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width="300.0dip"
+                                                   android:layout_height="wrap_content"
+                                                   android:layout_marginTop="23.0dip"
+                                                   n3:layout_constraintLeft_toLeftOf="parent"
+                                                   n3:layout_constraintRight_toRightOf="parent"
+                                                   n3:layout_constraintTop_toBottomOf="@id/textInputLayout2">
+
+        <EditText
+            android:id="@+id/etMac"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Introduce your relative MAC"
+            android:lines="1"
+            android:maxLength="17"
+            android:textSize="14.0sp"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout android:id="@+id/textInputLayout"
+                                                   xmlns:n4="http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width="300.0dip"
+                                                   android:layout_height="wrap_content"
+                                                   android:layout_marginTop="23.0dip"
+                                                   n4:layout_constraintLeft_toLeftOf="parent"
+                                                   n4:layout_constraintRight_toRightOf="parent"
+                                                   n4:layout_constraintTop_toBottomOf="@id/textInputLayout3">
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Introduce your relative password"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:textSize="14.0sp"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button android:id="@+id/btnAddRelative"
+            style="@style/CustomButton"
+            xmlns:n5="http://schemas.android.com/apk/res-auto"
+            android:layout_width="300.0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30.0dip"
+            android:text="Add Relative"
+            n5:layout_constraintLeft_toLeftOf="parent"
+            n5:layout_constraintRight_toRightOf="parent"
+            n5:layout_constraintTop_toBottomOf="@id/textInputLayout"/>
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@android:color/transparent"
+              android:orientation="vertical">
+
+    <View
+        android:id="@+id/vEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="0.0dip"
+        android:layout_weight="1.0"
+        android:background="@android:color/transparent"/>
+
+    <LinearLayout
+        android:id="@+id/llModalWindows"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16.0dip"
+        android:background="#ffffffff"
+        android:orientation="vertical"
+        android:padding="16.0dip">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Are you sure to share this location? Introduce the shared person phone"
+            android:textColor="#ff111111"
+            android:textStyle="bold"/>
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_weight="1.0">
+
+            <LinearLayout
+                android:id="@+id/llBodyContainer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etDialogPhone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:hint="Phone number"
+                    android:inputType="phone"
+                    android:lines="1"
+                    android:maxLength="20"
+                    android:textColor="#ff111111"
+                    android:textColorHint="#ffcccccc"/>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/llButtonContainers"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20.0dip"
+            android:orientation="horizontal"
+            android:showDividers="middle">
+
+            <Button
+                android:id="@+id/btnNegative"
+                style="@style/CustomButton"
+                android:layout_marginRight="3.0dip"
+                android:layout_weight="1.0"
+                android:width="0.0dip"
+                android:text="Cancel"/>
+
+            <Button
+                android:id="@+id/btnPositive"
+                style="@style/CustomButton"
+                android:layout_marginLeft="3.0dip"
+                android:layout_weight="1.0"
+                android:width="0.0dip"
+                android:text="Share"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

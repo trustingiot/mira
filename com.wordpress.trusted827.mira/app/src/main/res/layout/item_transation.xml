@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="16.0dip">
+
+    <android.support.v7.widget.AppCompatImageView android:id="@+id/ivAccept"
+                                                  xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                  android:layout_width="30.0dip"
+                                                  android:layout_height="30.0dip"
+                                                  android:layout_centerVertical="true"
+                                                  android:layout_marginRight="10.0dip"
+                                                  android:tint="#ff00ff00"
+                                                  app:srcCompat="@drawable/ic_accept"/>
+
+    <TextView
+        android:id="@+id/tvTransationLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/ivAccept"
+        android:text="X: 5000, Y: 3000"
+        android:textSize="20.0sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvTransationTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTransationLocation"
+        android:layout_toRightOf="@id/ivAccept"
+        android:text="12 Octubre 1980"
+        android:textSize="16.0sp"/>
+
+    <android.support.v7.widget.AppCompatImageView android:id="@+id/ivShare"
+                                                  xmlns:n3="http://schemas.android.com/apk/res-auto"
+                                                  android:layout_width="30.0dip"
+                                                  android:layout_height="30.0dip"
+                                                  android:layout_alignParentRight="true"
+                                                  android:layout_centerVertical="true"
+                                                  android:clickable="true"
+                                                  android:tint="@color/colorAccent"
+                                                  n3:srcCompat="@drawable/ic_share"/>
+</RelativeLayout>

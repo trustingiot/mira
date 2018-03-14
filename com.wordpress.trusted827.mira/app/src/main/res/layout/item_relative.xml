@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="16.0dip">
+
+    <TextView
+        android:id="@+id/tvRelativeName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Juan"
+        android:textSize="20.0sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvRelativeMac"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvRelativeName"
+        android:text="12:43:56:67"
+        android:textSize="16.0sp"/>
+</RelativeLayout>
