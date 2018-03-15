@@ -17,7 +17,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
+
+import static com.wordpress.trusted827.mira.Instance.*;
 
 public class GetTransactionsUseCase
 {
@@ -46,7 +47,7 @@ public class GetTransactionsUseCase
 
                 // Create request for remote resource.
                 Request request = new Request.Builder()
-                        .url("server" + "/firma/transactions")
+                        .url(BACKEND_URL + "/firma/transactions")
                         .post(body)
                         .build();
 

@@ -24,11 +24,13 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import static com.wordpress.trusted827.mira.Instance.*;
+
 public class CustomApplication extends Application {
     private static MqttAndroidClient mMqttAndroidClient;
 
     public static void connectMqtt(final Context paramContext) {
-        mMqttAndroidClient = new MqttAndroidClient(paramContext, "tcp://" + "server", new SharedPreferencesHelperImpl(paramContext).getOwnUserRawPhoneNumber());
+        mMqttAndroidClient = new MqttAndroidClient(paramContext, MQTT_SERVER_URL, new SharedPreferencesHelperImpl(paramContext).getOwnUserRawPhoneNumber());
         mMqttAndroidClient.setCallback(new MqttCallback() {
             public void connectionLost(Throwable paramAnonymousThrowable) {
             }
@@ -51,8 +53,8 @@ public class CustomApplication extends Application {
             MqttConnectOptions localMqttConnectOptions = new MqttConnectOptions();
             localMqttConnectOptions.setAutomaticReconnect(true);
             localMqttConnectOptions.setCleanSession(false);
-            localMqttConnectOptions.setUserName("user");
-            localMqttConnectOptions.setPassword("password".toCharArray());
+            localMqttConnectOptions.setUserName(MQTT_USER);
+            localMqttConnectOptions.setPassword(MQTT_PASSWORD);
             localMqttConnectOptions.setMqttVersion(4);
             mMqttAndroidClient.connect(localMqttConnectOptions, null, new IMqttActionListener() {
                 public void onFailure(IMqttToken paramAnonymousIMqttToken, Throwable paramAnonymousThrowable) {

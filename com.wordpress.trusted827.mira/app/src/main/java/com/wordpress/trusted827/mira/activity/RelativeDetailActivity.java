@@ -25,6 +25,8 @@ import com.wordpress.trusted827.mira.usecase.GetTransactionsUseCase;
 
 import java.util.ArrayList;
 
+import static com.wordpress.trusted827.mira.Instance.*;
+
 public class RelativeDetailActivity extends AppCompatActivity {
     private RecyclerView mRvTransactions;
     private TransactionAdapter mTransactionAdapter;
@@ -60,7 +62,7 @@ public class RelativeDetailActivity extends AppCompatActivity {
                             }
 
                             public void onTransationClick(Transaction transaction) {
-                                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("https://thetangle.org/transaction/" + transaction.getTransaction()));
+                                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(TRANSACTIONS_EXPLORER + transaction.getTransaction()));
                                 startActivity(intent);
                             }
                         });

@@ -11,12 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import com.wordpress.trusted827.mira.CustomApplication;
 import com.wordpress.trusted827.mira.R;
 import com.wordpress.trusted827.mira.adapter.TransactionAdapter;
-import com.wordpress.trusted827.mira.adapter.TransactionAdapter.TransactionCallback;
 import com.wordpress.trusted827.mira.components.CustomDialog;
-import com.wordpress.trusted827.mira.components.CustomDialog.Builder;
-import com.wordpress.trusted827.mira.components.CustomDialog.CallBack;
 import com.wordpress.trusted827.mira.components.MessageReceiver;
-import com.wordpress.trusted827.mira.components.MessageReceiver.NewMessageCallback;
 import com.wordpress.trusted827.mira.db.TransactionDB;
 import com.wordpress.trusted827.mira.db.mapper.TransactionDBMapper;
 import com.wordpress.trusted827.mira.entity.Transaction;
@@ -25,6 +21,8 @@ import com.wordpress.trusted827.mira.usecase.Callback;
 import com.wordpress.trusted827.mira.usecase.GetTransactionsUseCase;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.wordpress.trusted827.mira.Instance.*;
 
 public class SharedLocationsActivity
         extends AppCompatActivity
@@ -74,7 +72,7 @@ public class SharedLocationsActivity
 
                     public void onTransationClick(Transaction transaction)
                     {
-                        Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("https://thetangle.org/transaction/" + transaction.getTransaction()));
+                        Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(TRANSACTIONS_EXPLORER + transaction.getTransaction()));
                         startActivity(intent);
                     }
                 });
