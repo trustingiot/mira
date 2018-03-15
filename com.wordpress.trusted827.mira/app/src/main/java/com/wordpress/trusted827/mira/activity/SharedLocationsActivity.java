@@ -70,7 +70,7 @@ public class SharedLocationsActivity
                         }).show();
                     }
 
-                    public void onTransationClick(Transaction transaction)
+                    public void onVerifiedTransationClick(Transaction transaction)
                     {
                         Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(TRANSACTIONS_EXPLORER + transaction.getTransaction()));
                         startActivity(intent);

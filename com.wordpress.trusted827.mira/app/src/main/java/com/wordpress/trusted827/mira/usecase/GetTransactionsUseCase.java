@@ -62,9 +62,10 @@ public class GetTransactionsUseCase
                             long timestamp = array.getJSONObject(i).getJSONObject("body").getLong("timestamp");
                             int x = array.getJSONObject(i).getJSONObject("body").getJSONObject("location").getJSONObject("point").getInt("X");
                             int y = array.getJSONObject(i).getJSONObject("body").getJSONObject("location").getJSONObject("point").getInt("Y");
+                            String installation = array.getJSONObject(i).getJSONObject("body").getJSONObject("location").getString("installation");
                             String name = array.getJSONObject(i).getString("transaction");
                             String key = array.getJSONObject(i).getString("key");
-                            transactions.add(new Transaction(device, timestamp, x, y, name, key));
+                            transactions.add(new Transaction(device, timestamp, x, y, installation, name, key));
                         }
                     }
 

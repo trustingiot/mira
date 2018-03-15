@@ -36,7 +36,7 @@ public class RelativeDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_relative_detail);
         this.mRvTransactions = ((RecyclerView) findViewById(R.id.rvHistory));
         Relative relative = (Relative) getIntent().getExtras().getSerializable("EXTRA_RELATIVE");
-        getSupportActionBar().setTitle(relative.getName());
+        getSupportActionBar().setTitle(relative.getName().substring(0,1).toUpperCase() + relative.getName().substring(1) + "'s locations");
         LoadingDialog.startLoading(getSupportFragmentManager());
         new GetTransactionsUseCase(new TransactionDB(MIRASQLiteOpenHelper.getInstance(this), new TransactionDBMapper())).getDeviceTransactions(relative.getMac(), relative.getPassword(), new Callback<ArrayList<Transaction>>() {
             @Override
@@ -61,7 +61,7 @@ public class RelativeDetailActivity extends AppCompatActivity {
                                 }).show();
                             }
 
-                            public void onTransationClick(Transaction transaction) {
+                            public void onVerifiedTransationClick(Transaction transaction) {
                                 Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(TRANSACTIONS_EXPLORER + transaction.getTransaction()));
                                 startActivity(intent);
                             }

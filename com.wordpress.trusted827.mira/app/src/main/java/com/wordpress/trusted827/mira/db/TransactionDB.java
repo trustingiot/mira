@@ -20,7 +20,7 @@ public class TransactionDB extends BaseEntityDB
 
     public static String getCreateTableSentence()
     {
-        return "CREATE TABLE transactions (id INTEGER PRIMARY KEY AUTOINCREMENT, device TEXT, name TEXT, key TEXT, timestamp INTEGER, x INTEGER, y INTEGER);";
+        return "CREATE TABLE transactions (id INTEGER PRIMARY KEY AUTOINCREMENT, device TEXT, name TEXT, key TEXT, installation TEXT, timestamp INTEGER, x INTEGER, y INTEGER);";
     }
 
     private long saveNew(Transaction paramTransaction)
@@ -31,6 +31,7 @@ public class TransactionDB extends BaseEntityDB
         localContentValues.put("name", paramTransaction.getTransaction());
         localContentValues.put("key", paramTransaction.getKey());
         localContentValues.put("timestamp", paramTransaction.getTimestamp());
+        localContentValues.put("installation", paramTransaction.getInstallation());
         localContentValues.put("x", paramTransaction.getX());
         localContentValues.put("y", paramTransaction.getY());
         return localSQLiteDatabase.insert("transactions", null, localContentValues);
@@ -44,6 +45,7 @@ public class TransactionDB extends BaseEntityDB
         localContentValues.put("name", paramTransaction.getTransaction());
         localContentValues.put("key", paramTransaction.getKey());
         localContentValues.put("timestamp", paramTransaction.getTimestamp());
+        localContentValues.put("installation", paramTransaction.getInstallation());
         localContentValues.put("x", paramTransaction.getX());
         localContentValues.put("y", paramTransaction.getY());
         localSQLiteDatabase.update("transactions", localContentValues, "name LIKE " + paramTransaction.getTransaction(), null);

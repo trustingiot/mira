@@ -35,14 +35,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     public void onBindViewHolder(CustomViewHolder paramCustomViewHolder, final int paramInt)
     {
-        paramCustomViewHolder.root.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View paramAnonymousView)
-            {
-                TransactionAdapter.this.mTransactionCallback.onTransationClick((Transaction)TransactionAdapter.this.mTransactions.get(paramInt));
-            }
-        });
-        paramCustomViewHolder.location.setText("X: " + (mTransactions.get(paramInt)).getX() + ", Y: " + (mTransactions.get(paramInt)).getY());
+        String text = mTransactions.get(paramInt).getInstallation();
+        text = text.substring(0, 1).toUpperCase() + text.substring(1);
+        paramCustomViewHolder.installation.setText(text);
+
+        paramCustomViewHolder.location.setText("{" + (mTransactions.get(paramInt)).getX() + ", " + (mTransactions.get(paramInt)).getY() + "}");
         Object localObject = Calendar.getInstance(Locale.ENGLISH);
         ((Calendar)localObject).setTimeInMillis((mTransactions.get(paramInt)).getTimestamp());
         localObject = DateFormat.format("dd-MM-yyyy HH:mm", (Calendar)localObject).toString();
@@ -52,6 +49,13 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             public void onClick(View paramAnonymousView)
             {
                 TransactionAdapter.this.mTransactionCallback.onShareTransationClick(mTransactions.get(paramInt));
+            }
+        });
+        paramCustomViewHolder.verified.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View paramAnonymousView)
+            {
+                TransactionAdapter.this.mTransactionCallback.onVerifiedTransationClick(mTransactions.get(paramInt));
             }
         });
     }
@@ -64,18 +68,22 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     class CustomViewHolder
             extends RecyclerView.ViewHolder
     {
+        private TextView installation;
         private TextView location;
         private View root;
         private AppCompatImageView share;
+        private TextView verified;
         private TextView time;
 
         public CustomViewHolder(View view)
         {
             super(view);
             this.root = view;
+            this.installation = ((TextView)view.findViewById(R.id.tvTransationInstallation));
             this.location = ((TextView)view.findViewById(R.id.tvTransationLocation));
             this.time = ((TextView)view.findViewById(R.id.tvTransationTime));
             this.share = ((AppCompatImageView)view.findViewById(R.id.ivShare));
+            this.verified = (TextView) view.findViewById(R.id.ivAccept);
         }
     }
 
@@ -83,6 +91,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     {
         void onShareTransationClick(Transaction paramTransaction);
 
-        void onTransationClick(Transaction paramTransaction);
+        void onVerifiedTransationClick(Transaction paramTransaction);
     }
 }
