@@ -1,5 +1,6 @@
 package com.wordpress.trusted827.mira;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,9 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.lang.reflect.Field;
+import java.util.Map;
+
 import static com.wordpress.trusted827.mira.Instance.*;
 
 public class CustomApplication extends Application {
@@ -41,7 +45,16 @@ public class CustomApplication extends Application {
             public void messageArrived(String paramAnonymousString, MqttMessage paramAnonymousMqttMessage)
                     throws Exception {
                 Transaction transaction = (Transaction) new Gson().fromJson(paramAnonymousMqttMessage.toString(), Transaction.class);
-                new SaveTransactionUseCase(new TransactionDB(MIRASQLiteOpenHelper.getInstance(paramContext), new TransactionDBMapper())).saveTransaction(transaction);
+                TransactionDB transactionDB = new TransactionDB(MIRASQLiteOpenHelper.getInstance(paramContext), new TransactionDBMapper());
+                new SaveTransactionUseCase(transactionDB).saveTransaction(transaction);
+                final Activity activity = getActivity();
+                if (activity != null) {
+                    activity.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(activity, "New shared location", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
                 if (MessageReceiver.isRegistered) {
                     Intent intent = new Intent("com.wordpress.trusted827.mira.NEW_MESSAGE");
                     intent.putExtra("transaction", transaction);
@@ -81,13 +94,14 @@ public class CustomApplication extends Application {
         if ((mMqttAndroidClient != null) && (mMqttAndroidClient.isConnected())) {
             try {
                 mMqttAndroidClient.publish("/mira/inbox/" + paramString, new MqttMessage(payload));
+                Toast.makeText(paramContext, "Shared", Toast.LENGTH_SHORT).show();
 
             } catch (MqttException e) {
-                Toast.makeText(paramContext, "Error sharing, try again later", Toast.LENGTH_LONG).show();
+                Toast.makeText(paramContext, "Error sharing, try again later", Toast.LENGTH_SHORT).show();
             }
         } else {
             connectMqtt(paramContext);
-            Toast.makeText(paramContext, "Error sharing, try again later", Toast.LENGTH_LONG).show();
+            Toast.makeText(paramContext, "Error sharing, try again later", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -116,5 +130,33 @@ public class CustomApplication extends Application {
         if (!new SharedPreferencesHelperImpl(getApplicationContext()).getOwnUserRawPhoneNumber().isEmpty()) {
             connectMqtt(getApplicationContext());
         }
+    }
+
+    public static Activity getActivity()  {
+        try {
+            Class activityThreadClass = Class.forName("android.app.ActivityThread");
+            Object activityThread = activityThreadClass.getMethod("currentActivityThread").invoke(null);
+            Field activitiesField = activityThreadClass.getDeclaredField("mActivities");
+            activitiesField.setAccessible(true);
+
+            Map<Object, Object> activities = (Map<Object, Object>) activitiesField.get(activityThread);
+            if (activities == null)
+                return null;
+
+            for (Object activityRecord : activities.values()) {
+                Class activityRecordClass = activityRecord.getClass();
+                Field pausedField = activityRecordClass.getDeclaredField("paused");
+                pausedField.setAccessible(true);
+                if (!pausedField.getBoolean(activityRecord)) {
+                    Field activityField = activityRecordClass.getDeclaredField("activity");
+                    activityField.setAccessible(true);
+                    Activity activity = (Activity) activityField.get(activityRecord);
+                    return activity;
+                }
+            }
+        } catch (Exception e) {
+        }
+
+        return null;
     }
 }

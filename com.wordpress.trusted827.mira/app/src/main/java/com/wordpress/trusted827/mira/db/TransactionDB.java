@@ -48,7 +48,7 @@ public class TransactionDB extends BaseEntityDB
         localContentValues.put("installation", paramTransaction.getInstallation());
         localContentValues.put("x", paramTransaction.getX());
         localContentValues.put("y", paramTransaction.getY());
-        localSQLiteDatabase.update("transactions", localContentValues, "name LIKE " + paramTransaction.getTransaction(), null);
+        localSQLiteDatabase.update("transactions", localContentValues, "name LIKE '" + paramTransaction.getTransaction() + "'", null);
     }
 
     public boolean checkIfExist(Transaction paramTransaction)

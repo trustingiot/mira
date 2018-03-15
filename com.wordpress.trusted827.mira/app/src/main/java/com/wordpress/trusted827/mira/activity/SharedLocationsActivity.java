@@ -55,7 +55,7 @@ public class SharedLocationsActivity
             public void onSuccess(List<Transaction> transactions) {
                 mTransactions.clear();
                 mTransactions.addAll(transactions);
-                mTransactionAdapter = new TransactionAdapter(mTransactions, new TransactionAdapter.TransactionCallback()
+                mTransactionAdapter = new TransactionAdapter(mTransactions, true, new TransactionAdapter.TransactionCallback()
                 {
                     public void onShareTransationClick(final Transaction transaction)
                     {

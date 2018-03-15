@@ -49,7 +49,7 @@ public class RelativeDetailActivity extends AppCompatActivity {
             public void onSuccess(final ArrayList<Transaction> transactions) {
                 new Handler(getMainLooper()).post(new Runnable() {
                     public void run() {
-                        mTransactionAdapter = new TransactionAdapter(transactions, new TransactionAdapter.TransactionCallback() {
+                        mTransactionAdapter = new TransactionAdapter(transactions, false, new TransactionAdapter.TransactionCallback() {
                             public void onShareTransationClick(final Transaction transaction) {
                                 new CustomDialog.Builder(RelativeDetailActivity.this).setCallBack(new CustomDialog.CallBack() {
                                     public void onNegativeClick() {

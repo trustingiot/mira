@@ -16,10 +16,12 @@
         android:id="@+id/llModalWindows"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16.0dip"
         android:background="#ffffffff"
         android:orientation="vertical"
-        android:padding="16.0dip">
+        android:padding="16.0dip"
+        android:layout_marginLeft="16.0dip"
+        android:layout_marginRight="16.0dip"
+        android:layout_marginBottom="50.0dip">
 
         <TextView
             android:id="@+id/tvTitle"
