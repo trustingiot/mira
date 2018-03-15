@@ -18,17 +18,19 @@ import com.wordpress.trusted827.mira.helper.MIRASQLiteOpenHelper;
 import com.wordpress.trusted827.mira.usecase.AddRelativeUseCase;
 import com.wordpress.trusted827.mira.usecase.Callback;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class AddRelativeActivity
-        extends AppCompatActivity
-{
+        extends AppCompatActivity {
     private Button btnAddRelative;
     private EditText etMac;
     private EditText etName;
     private EditText etPassword;
+    private RelativeDB relativeDB;
 
-    private void addRelative(String paramString1, String paramString2, String paramString3)
-    {
-        new AddRelativeUseCase(new RelativeDB(MIRASQLiteOpenHelper.getInstance(this), new RelativeDBMapper())).addRelative(new Relative(paramString1, paramString2, paramString3), new Callback<Void>() {
+    private void addRelative(String paramString1, String paramString2, String paramString3) {
+        new AddRelativeUseCase(relativeDB).addRelative(new Relative(paramString1, paramString2, paramString3), new Callback<Void>() {
             @Override
             public void onError() {
                 Toast.makeText(AddRelativeActivity.this, "Error adding relative", Toast.LENGTH_LONG).show();
@@ -38,7 +40,7 @@ public class AddRelativeActivity
             public void onSuccess(Void paramT) {
                 new Handler(getMainLooper()).post(new Runnable() {
                     public void run() {
-                        Toast.makeText(AddRelativeActivity.this, "Relative added successfully", 1).show();
+                        Toast.makeText(AddRelativeActivity.this, "Relative added successfully", Toast.LENGTH_LONG).show();
                         finish();
                     }
                 });
@@ -46,32 +48,37 @@ public class AddRelativeActivity
         });
     }
 
-    protected void onCreate(Bundle paramBundle)
-    {
+    protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         setContentView(R.layout.activity_add_relative);
-        this.etName = ((EditText)findViewById(R.id.etName));
-        this.etMac = ((EditText)findViewById(R.id.etMac));
-        this.etPassword = ((EditText)findViewById(R.id.etPassword));
-        this.btnAddRelative = ((Button)findViewById(R.id.btnAddRelative));
+        relativeDB = new RelativeDB(MIRASQLiteOpenHelper.getInstance(this), new RelativeDBMapper());
+        this.etName = ((EditText) findViewById(R.id.etName));
+        this.etMac = ((EditText) findViewById(R.id.etMac));
+        this.etPassword = ((EditText) findViewById(R.id.etPassword));
+        this.btnAddRelative = ((Button) findViewById(R.id.btnAddRelative));
         this.btnAddRelative.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name = AddRelativeActivity.this.etName.getText().toString();
                 String str1 = AddRelativeActivity.this.etMac.getText().toString();
                 String str2 = AddRelativeActivity.this.etPassword.getText().toString();
-                if (TextUtils.isEmpty(name))
-                {
+                Set<String> devices = new HashSet<>();
+                for (Relative relative : relativeDB.getAll()) {
+                    devices.add(relative.getMac());
+                }
+                if (TextUtils.isEmpty(name)) {
                     AddRelativeActivity.this.etName.setError("Invalid name");
                     return;
                 }
-                if (TextUtils.isEmpty(str1))
-                {
+                if (TextUtils.isEmpty(str1)) {
                     AddRelativeActivity.this.etMac.setError("Invalid mac");
                     return;
                 }
-                if (TextUtils.isEmpty(str2))
-                {
+                if (devices.contains(str1)) {
+                    AddRelativeActivity.this.etMac.setError("Assigned");
+                    return;
+                }
+                if (TextUtils.isEmpty(str2)) {
                     AddRelativeActivity.this.etPassword.setError("Invalid password");
                     return;
                 }
