@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">MIRA</string>
+    <string name="app_name">mira</string>
+    <string name="devices_button">relatives</string>
+    <string name="shared_button">shared locations</string>
 </resources>

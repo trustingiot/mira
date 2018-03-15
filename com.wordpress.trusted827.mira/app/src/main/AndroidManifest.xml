@@ -43,6 +43,9 @@
             android:parentActivityName="com.wordpress.trusted827.mira.activity.RelativesActivity"/>
 
         <service android:name="org.eclipse.paho.android.service.MqttService"/>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
     </application>
 </manifest>

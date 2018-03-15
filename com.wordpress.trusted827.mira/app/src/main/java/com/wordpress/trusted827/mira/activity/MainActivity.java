@@ -48,6 +48,6 @@ public class MainActivity extends AppCompatActivity
                 goToSharedLocations();
             }
         });
-        this.mTvPhone.setText("Actual phone: " + new SharedPreferencesHelperImpl(this).getOwnUserRawPhoneNumber());
+        this.mTvPhone.setText("Your phone: " + new SharedPreferencesHelperImpl(this).getOwnUserRawPhoneNumber());
     }
 }
